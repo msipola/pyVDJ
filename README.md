@@ -2,7 +2,7 @@
 
 ![project unmaintained](https://img.shields.io/badge/project-unmaintained-red.svg)
 
-_**Note**: this project is unmaintained. Feel free to fork it or re-use any part of it (license: GPLv3). Alternatives to this program are [scirpy](https://icbi-lab.github.io/scirpy/) and [Immunarch](https://immunarch.com)._
+_**Note**: this project is sparcely maintained. Alternatives to this program are [scirpy](https://icbi-lab.github.io/scirpy/) and [Immunarch](https://immunarch.com)._
 
 
 V(D)J sequencing data analysis
@@ -140,7 +140,7 @@ This requires the python-Levenshtein and the igraph-python packages.
 
 ### Versions
 
-The pyVDJ project uses the [semantic versioning](https://semver.org) scheme. The latest release is [v0.1.2](https://github.com/veghp/pyVDJ/releases).
+The pyVDJ project uses the [semantic versioning](https://semver.org) scheme. The latest release is [v0.1.3](https://github.com/msipola/pyVDJ/releases).
 
 
 ### License
@@ -157,4 +157,3 @@ The package was originally developed for data made with Cell Ranger v2.1.1 (Chem
     pandas 0.25.1
     anndata 0.6.21
     scanpy 1.4.3
-
