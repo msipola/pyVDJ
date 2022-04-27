@@ -89,5 +89,6 @@ def load_vdj(samples, adata=None, obs_col='vdj_obs', cellranger=3):
     else:
         adata.uns['pyvdj'] = vdj_dict
         adata = pyvdj.add_obs(adata, obs = ['has_vdjdata'])
+        adata.obs['vdj_has_vdjdata'] = adata.obs['vdj_has_vdjdata'].astype(str).astype('category')
           # needed for making other annotations with add_obs()
         return adata

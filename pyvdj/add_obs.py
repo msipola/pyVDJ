@@ -31,11 +31,11 @@ def add_clonotype(adata):
 
     adata.obs['vdj_clonotype'] = adata.obs[obs_col]
     # Remove missing ones:
-    adata.obs.loc[(-adata.obs['vdj_has_vdjdata']), 'vdj_clonotype'] = None
+    adata.obs.loc[(adata.obs['vdj_has_vdjdata'] == 'False'), 'vdj_clonotype'] = None
 
     tcr_dict = dict(zip(df['barcode_meta'], df['clonotype_meta']))
     adata.obs['vdj_clonotype'].replace(to_replace=tcr_dict, inplace=True)
-    adata.obs['vdj_clonotype'] = adata.obs['vdj_clonotype'].astype('category')
+    adata.obs['vdj_clonotype'] = adata.obs['vdj_clonotype'].astype(str).astype('category')
 
     return adata
 
@@ -44,7 +44,7 @@ def add_is_clone(adata):
     if 'vdj_clone_count' not in adata.obs.columns:
         adata = add_clone_count(adata)
     adata.obs['vdj_is_clone'] = adata.obs['vdj_clone_count'] > 1
-
+    adata.obs['vdj_is_clone'] = adata.obs['vdj_is_clone'].astype(str).astype('category')
     return adata
 
 
@@ -53,10 +53,10 @@ def add_all_productive(adata):
     df = adata.uns['pyvdj']['df']
 
     adata.obs['vdj_all_productive'] = adata.obs[obs_col]
-    adata.obs.loc[(-adata.obs['vdj_has_vdjdata']), 'vdj_all_productive'] = None
+    adata.obs.loc[(adata.obs['vdj_has_vdjdata'] == 'False'), 'vdj_all_productive'] = None
     prod_dict = dict(zip(df['barcode_meta'], df['productive_all']))
     adata.obs['vdj_all_productive'].replace(to_replace=prod_dict, inplace=True)
-
+    adata.obs['vdj_all_productive'] = adata.obs['vdj_all_productive'].astype(str).astype('category')
     return adata
 
 
@@ -65,10 +65,10 @@ def add_any_productive(adata):
     df = adata.uns['pyvdj']['df']
 
     adata.obs['vdj_any_productive'] = adata.obs[obs_col]
-    adata.obs.loc[(-adata.obs['vdj_has_vdjdata']), 'vdj_any_productive'] = None
+    adata.obs.loc[(adata.obs['vdj_has_vdjdata'] == 'False'), 'vdj_any_productive'] = None
     prod_dict = dict(zip(df['barcode_meta'], df['productive_any']))
     adata.obs['vdj_any_productive'].replace(to_replace=prod_dict, inplace=True)
-
+    adata.obs['vdj_any_productive'] = adata.obs['vdj_any_productive'].astype(str).astype('category')
     return adata
 
 
@@ -87,10 +87,11 @@ def add_chains(adata):
 
     for c in chain_nested_dict.keys():
         adata.obs['vdj_chain_' + c] = adata.obs[obs_col]
-        adata.obs.loc[(-adata.obs['vdj_has_vdjdata']), 'vdj_chain_' + c] = 'No_data'
+        adata.obs.loc[(adata.obs['vdj_has_vdjdata'] == 'False'), 'vdj_chain_' + c] = 'No_data'
 
         adata.obs['vdj_chain_' + c].replace(to_replace=chain_nested_dict[c], inplace=True)
-
+        for i in adata.obs.columns[adata.obs.columns.str.startswith('vdj_chain_')]:
+            adata.obs[i] = adata.obs[i].astype(str).astype('category')
     return adata
 
 
@@ -110,9 +111,10 @@ def add_genes(adata):
     for c in constant_genes_nested_dict.keys():
         print('Preparing annotation for %s' % c)
         adata.obs['vdj_constant_' + c] = adata.obs[obs_col]
-        adata.obs.loc[(-adata.obs['vdj_has_vdjdata']), 'vdj_constant_' + c] = 'No_data'
+        adata.obs.loc[(adata.obs['vdj_has_vdjdata'] == 'False'), 'vdj_constant_' + c] = 'No_data'
         adata.obs['vdj_constant_' + c].replace(to_replace=constant_genes_nested_dict[c], inplace=True)
-
+        for i in adata.obs.columns[adata.obs.columns.str.startswith('vdj_constant_')]:
+            adata.obs[i] = adata.obs[i].astype(str).astype('category')
     return adata
 
 
@@ -131,9 +133,10 @@ def add_v_genes(adata):
 
     for v in v_genes_nested_dict.keys():
         adata.obs['vdj_v_' + v] = adata.obs[obs_col]
-        adata.obs.loc[(-adata.obs['vdj_has_vdjdata']), 'vdj_v_' + v] = 'No_data'
+        adata.obs.loc[[(adata.obs['vdj_has_vdjdata'] == 'False'), 'vdj_v_' + v] = 'No_data'
         adata.obs['vdj_v_' + v].replace(to_replace=v_genes_nested_dict[v], inplace=True)
-
+        for i in adata.obs.columns[adata.obs.columns.str.startswith('vdj_v_')]:
+            adata.obs[i] = adata.obs[i].astype(str).astype('category')
     return adata
 
 
@@ -152,9 +155,10 @@ def add_j_genes(adata):
 
     for j in j_genes_nested_dict.keys():
         adata.obs['vdj_j_' + j] = adata.obs[obs_col]
-        adata.obs.loc[(-adata.obs['vdj_has_vdjdata']), 'vdj_j_' + j] = 'No_data'
+        adata.obs.loc[(adata.obs['vdj_has_vdjdata'] == 'False'), 'vdj_j_' + j] = 'No_data'
         adata.obs['vdj_j_' + j].replace(to_replace=j_genes_nested_dict[j], inplace=True)
-
+        for i in adata.obs.columns[adata.obs.columns.str.startswith('vdj_j_')]:
+            adata.obs[i] = adata.obs[i].astype(str).astype('category')
     return adata
 
 
