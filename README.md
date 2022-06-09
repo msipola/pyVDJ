@@ -17,7 +17,7 @@ This enables plotting various V(D)J properties and handling mRNA (GEX) and V(D)J
 
 Install the latest version from Github:
 
-`pip install git+https://github.com/veghp/pyVDJ.git`
+`pip install git+https://github.com/msipola/pyVDJ.git`
 
 
 ## Usage
