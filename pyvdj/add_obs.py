@@ -133,7 +133,7 @@ def add_v_genes(adata):
 
     for v in v_genes_nested_dict.keys():
         adata.obs['vdj_v_' + v] = adata.obs[obs_col]
-        adata.obs.loc[[(adata.obs['vdj_has_vdjdata'] == 'False'), 'vdj_v_' + v] = 'No_data'
+        adata.obs.loc[(adata.obs['vdj_has_vdjdata'] == 'False'), 'vdj_v_' + v] = 'No_data'
         adata.obs['vdj_v_' + v].replace(to_replace=v_genes_nested_dict[v], inplace=True)
         for i in adata.obs.columns[adata.obs.columns.str.startswith('vdj_v_')]:
             adata.obs[i] = adata.obs[i].astype(str).astype('category')
