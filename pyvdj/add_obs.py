@@ -43,7 +43,7 @@ def add_clonotype(adata):
 def add_is_clone(adata):
     if 'vdj_clone_count' not in adata.obs.columns:
         adata = add_clone_count(adata)
-    adata.obs['vdj_is_clone'] = adata.obs['vdj_clone_count'] > 1
+    adata.obs['vdj_is_clone'] = np.where(adata.obs['vdj_clone_count'] > 1, 'True', 'False')
     adata.obs['vdj_is_clone'] = adata.obs['vdj_is_clone'].astype(str).astype('category')
     return adata
 

@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name='pyvdj',
-    version='0.1.3',
+    version='0.1.4',
     author='Peter Vegh',
     author_email='peter.vegh@newcastle.ac.uk',
     maintainer='Mikko Sipola',

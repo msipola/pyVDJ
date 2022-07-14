@@ -140,7 +140,7 @@ This requires the python-Levenshtein and the igraph-python packages.
 
 ### Versions
 
-The pyVDJ project uses the [semantic versioning](https://semver.org) scheme. The latest release is [v0.1.3](https://github.com/msipola/pyVDJ/releases).
+The pyVDJ project uses the [semantic versioning](https://semver.org) scheme. The latest release is [v0.1.4](https://github.com/msipola/pyVDJ/releases).
 
 
 ### License
